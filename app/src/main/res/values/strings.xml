@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Resistor Calculator App</string>
+    <string-array name="Band_Colours">
+        <item>Black</item>
+        <item>Brown</item>
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Violet</item>
+        <item>Gray</item>
+        <item>White</item>
+        <item>Silver</item>
+        <item>Gold</item>
+        <item>None</item>
+    </string-array>
+</resources>
