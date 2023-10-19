@@ -15,6 +15,7 @@
         android:layout_marginTop="38dp"
         android:layout_marginEnd="37dp"
         android:layout_marginBottom="40dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/textViewBand2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
         android:layout_height="46dp"
         android:layout_marginStart="37dp"
         android:layout_marginEnd="37dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +41,7 @@
         android:layout_marginTop="37dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="39dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/textViewBand4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +55,7 @@
         android:layout_marginTop="34dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="43dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/buttonCalculate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +105,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="81dp"
+        android:backgroundTint="#F44336"
+        android:onClick="doCalculate"
         android:text="Calculate"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonClear"
         app:layout_constraintStart_toStartOf="parent" />
@@ -111,6 +117,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="93dp"
         android:layout_marginBottom="48dp"
+        android:backgroundTint="#F44336"
+        android:onClick="doClear"
         android:text="Clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -119,9 +127,11 @@
         android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="102dp"
         android:layout_marginBottom="101dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewBand1"
         app:layout_constraintStart_toStartOf="@+id/textViewBand1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
