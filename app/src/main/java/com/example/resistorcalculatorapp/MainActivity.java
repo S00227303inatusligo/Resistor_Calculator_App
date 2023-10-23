@@ -3,16 +3,15 @@ package com.example.resistorcalculatorapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView;
-
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     Spinner spinnerBand1, spinnerBand2, spinnerBand3, spinnerBand4;
-    int resistorValue, tolerancePercentage;
+    int toleranceValue;
+    int[] resistanceValues;
+    TextView resultTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,89 +22,42 @@ public class MainActivity extends AppCompatActivity {
         spinnerBand3 = findViewById(R.id.spinnerBand3);
         spinnerBand4 = findViewById(R.id.spinnerBand4);
 
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(MainActivity.this, R.array.Band_Colours, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerBand1.setAdapter(adapter);
-        spinnerBand2.setAdapter(adapter);
-        spinnerBand3.setAdapter(adapter);
-        spinnerBand4.setAdapter(adapter);
+        // Load the color array from resources
+        int[] colors = getResources().getIntArray(R.array.androidcolors);
+        String[] colorNames = getResources().getStringArray(R.array.Band_Colours);
 
-        spinnerBand1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // Create custom adapters for each Spinner
+        SpinnerAdapter adapter1 = new SpinnerAdapter(this, colors, colorNames);
+        SpinnerAdapter adapter2 = new SpinnerAdapter(this, colors, colorNames);
+        SpinnerAdapter adapter3 = new SpinnerAdapter(this, colors, colorNames);
+        SpinnerAdapter adapter4 = new SpinnerAdapter(this, colors, colorNames);
 
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String selectedItem = parentView.getItemAtPosition(position).toString();
-                if(selectedItem == "Black"){
-                    resistorValue = 0;
-                }
-                if(selectedItem == "Brown"){
-                    resistorValue = 1;
-                }
-                if(selectedItem == "Red"){
-                    resistorValue = 2;
-                }
-                if(selectedItem == "Orange"){
-                    resistorValue = 3;
-                }
-                if(selectedItem == "Yellow"){
-                    resistorValue = 4;
-                }
-                if(selectedItem == "Green"){
-                    resistorValue = 5;
-                }
-                if(selectedItem == "Blue"){
-                    resistorValue = 6;
-                }
-                if(selectedItem == "Violet"){
-                    resistorValue = 7;
-                }
-                if(selectedItem == "Gray"){
-                    resistorValue = 8;
-                }
-                if(selectedItem == "White"){
-                    resistorValue = 9;
-                }
-                if(selectedItem == "Gold"){
-                    resistorValue = 0;
-                }
-                if(selectedItem == "Silver"){
-                    resistorValue = 0;
-                }
+        // Set the custom adapters for each Spinner
+        spinnerBand1.setAdapter(adapter1);
+        spinnerBand2.setAdapter(adapter2);
+        spinnerBand3.setAdapter(adapter3);
+        spinnerBand4.setAdapter(adapter4);
 
-            }
-            public void onNothingSelected(AdapterView<?> parentView) {
-                resistorValue = 0;
-            }
-        });
-        spinnerBand2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+        resistanceValues = new int[]{
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2
+        };
 
-            }
-            public void onNothingSelected(AdapterView<?> parentView) {
 
-            }
-        });
-        spinnerBand3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-            }
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-        });
-        spinnerBand4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-            }
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-        });
     }
-    public void doCalculate() {
-        TextView result = findViewById(R.id.textViewResult);
-        result.setText(Integer.toString(resistorValue));
-    }
-    public void doClear() {
 
+    public void doCalculate(View view) {
+        int band1 = spinnerBand1.getSelectedItemPosition();
+        int band2 = spinnerBand2.getSelectedItemPosition();
+        int band3 = spinnerBand3.getSelectedItemPosition();
+        int band4 = spinnerBand4.getSelectedItemPosition();
+        resultTextView = findViewById(R.id.textViewResult);
+
+        if (band1 != -1 && band2 != -1 && band3 != -1) {
+            int resistance = (resistanceValues[band1] * 10 + resistanceValues[band2]) * (int) Math.pow(10, resistanceValues[band3]);
+            resultTextView.setText("Resistance: " + resistance + " ohms");
+        } else {
+            resultTextView.setText("Please select all three color bands.");
+        }
     }
 }
