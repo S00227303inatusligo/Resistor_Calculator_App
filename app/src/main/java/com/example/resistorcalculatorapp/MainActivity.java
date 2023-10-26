@@ -7,16 +7,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    // Declare variables
     Spinner spinnerBand1, spinnerBand2, spinnerBand3, spinnerBand4;
-    int toleranceValue;
+    double toleranceValue;
     int[] resistanceValues;
-    TextView resultTextView;
+    TextView resultTextView, textViewTolerance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialise Spinners
         spinnerBand1 = findViewById(R.id.spinnerBand1);
         spinnerBand2 = findViewById(R.id.spinnerBand2);
         spinnerBand3 = findViewById(R.id.spinnerBand3);
@@ -38,26 +40,94 @@ public class MainActivity extends AppCompatActivity {
         spinnerBand3.setAdapter(adapter3);
         spinnerBand4.setAdapter(adapter4);
 
+        // Declare array for Resistance Values
         resistanceValues = new int[]{
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2
         };
 
-
-
     }
 
     public void doCalculate(View view) {
+        // Get selected items of each band
         int band1 = spinnerBand1.getSelectedItemPosition();
         int band2 = spinnerBand2.getSelectedItemPosition();
         int band3 = spinnerBand3.getSelectedItemPosition();
         int band4 = spinnerBand4.getSelectedItemPosition();
         resultTextView = findViewById(R.id.textViewResult);
 
+        // Calculating the resistance value based on band selections and set text
         if (band1 != -1 && band2 != -1 && band3 != -1) {
             int resistance = (resistanceValues[band1] * 10 + resistanceValues[band2]) * (int) Math.pow(10, resistanceValues[band3]);
-            resultTextView.setText("Resistance: " + resistance + " ohms");
+            resultTextView.setText("Resistance: " + resistance + " Ω");
         } else {
             resultTextView.setText("Please select all three color bands.");
         }
+
+        if(band4 == 0)
+        {
+            toleranceValue = 0;
+        }
+        else if(band4 == 1)
+        {
+            toleranceValue = 1;
+        }
+        else if(band4 == 2)
+        {
+            toleranceValue = 2;
+        }
+        else if(band4 == 3)
+        {
+            toleranceValue = 0;
+        }
+        else if(band4 == 4)
+        {
+            toleranceValue = 0;
+        }
+        else if(band4 == 5)
+        {
+            toleranceValue = 0.5;
+        }
+        else if(band4 == 6)
+        {
+            toleranceValue = 0.25;
+        }
+        else if(band4 == 7)
+        {
+            toleranceValue = 0.1;
+        }
+        else if(band4 == 8)
+        {
+            toleranceValue = 0.05;
+        }
+        else if(band4 == 9)
+        {
+            toleranceValue = 0;
+        }
+        else if(band4 == 10)
+        {
+            toleranceValue = 5;
+        }
+        else if(band4 == 11)
+        {
+            toleranceValue = 10;
+        }
+        else if(band4 == 12)
+        {
+            toleranceValue = 20;
+        }
+
+        textViewTolerance = findViewById(R.id.textViewTolerance);
+
+        textViewTolerance.setText("Tolerance : ±" + toleranceValue + "%");
+    }
+
+    public void doClear(View view) {
+        resultTextView.setText("");
+        textViewTolerance.setText("");
+
+        spinnerBand1.setSelection(0);
+        spinnerBand2.setSelection(0);
+        spinnerBand3.setSelection(0);
+        spinnerBand4.setSelection(0);
     }
 }

@@ -74,6 +74,4 @@ public class SpinnerAdapter extends BaseAdapter {
 
         return convertView;
     }
-
-
 }
