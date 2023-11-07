@@ -9,10 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class SpinnerAdapter extends BaseAdapter {
+    // Declare variables
     int[] colors;
     Context context;
     String[] colorNames;
 
+    // Initialise variables
     public SpinnerAdapter(Context context, int[] colors, String[] colorNames)
     {
         this.context = context;
@@ -20,20 +22,25 @@ public class SpinnerAdapter extends BaseAdapter {
         this.colorNames = this.colorNames;
     }
 
+    // Check if colors array is not null
     @Override
     public int getCount() {
-        return colors != null ? colors.length : 0; // Check if colors array is not null
+        return colors != null ? colors.length : 0;
     }
 
+    // Check if selected item is not null
     @Override
     public Object getItem(int position) {
         return colors != null && position >= 0 && position < colors.length ? colors[position] : 0;
     }
 
+    // Gets selected item id
     public long getItemId(int arg0) {
         return arg0;
     }
 
+    // Sets colour of spinners to the item selected on loadup
+    // Hoped to have the text come up as white on startup with this but couldn't get it working
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int pos, View view, ViewGroup parent) {
@@ -54,6 +61,7 @@ public class SpinnerAdapter extends BaseAdapter {
         return view;
     }
 
+    // Sets the colours of the dropdown menu and the text colours when drop down menu is opened
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

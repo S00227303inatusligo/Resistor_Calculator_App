@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             resultTextView.setText("Please select all three color bands.");
         }
 
+        // Takes the value of band 4 and sets the tolerance value based on selection
         if(band4 == 0)
         {
             toleranceValue = 0;
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         textViewTolerance.setText("Tolerance : ±" + toleranceValue + "%");
     }
 
+    // Clear button functionality
     public void doClear(View view) {
         resultTextView.setText("");
         textViewTolerance.setText("");
